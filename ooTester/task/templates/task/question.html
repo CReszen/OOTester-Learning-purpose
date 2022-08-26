@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'task/question.css' %}">
+    <title>Question #{{question.id}}</title>
+  </head>
+  <body>
+    <div id="box">
+      <h1>{{question.text}}</h1>
+      <img src="{{question.photo.url}}" alt="A photo" width="450" height="auto">
+
+      <form action="{% url 'task:change' id=question.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" name="Complete" value="Complete ? ">Complete ?</button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>OOTester</title>
+    <link rel="stylesheet" href="{% static 'task/menu.css' %}">
+  </head>
+  <body>
+    <div id="banner">
+      <h1>OOTester</h1>
+      <div class="user-profile">
+      </div>
+    </div>
+    <div id="quest-menu">
+      <div id="container-1">
+        {% for quest in question%}
+        <div class="box">
+          {% if quest.is_complete %}
+            <div id="box-completed">
+                <a href="#">{{forloop.counter}}</a>
+            </div>
+            {% else %}
+            <div id="box-not-completed">
+                <a href="{{quest.id}}/">{{forloop.counter}}</a>
+            </div>
+          {% endif %}
+          </div>
+          {% empty %}
+            <h1>No Question</h1>
+      {% endfor %}
+      </div>
+    </div>
+    <div id="bottom">
+      <form class="bottom-feature" action="{% url 'task:reset' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" name="button">Reset</button>
+      </form>
+    </div>
+  </body>
+</html>
